@@ -50,6 +50,7 @@ App de registro de gastos para Android
 6. Fusionar los cambios en develop (cuando el PR sea aprobado) Después de que alguien del equipo apruebe tu PR, puedes fusionarlo en develop con:
     ```sh
     C:\Users\tuUsuario\Escritorio\economiza> git checkout develop
+    C:\Users\tuUsuario\Escritorio\economiza> git pull origin develop
     C:\Users\tuUsuario\Escritorio\economiza> git merge nombre-de-tu-rama
     C:\Users\tuUsuario\Escritorio\economiza> git push origin develop
 
