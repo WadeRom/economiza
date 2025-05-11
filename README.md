@@ -1,6 +1,19 @@
 # EcoNomiza
 App de registro de gastos para Android
 
+## 📦 Instalación
+1. **Clona el repositorio**
+   ```sh
+   pegar en la terminal:  git clone git@github.com:WadeRom/economiza.git
+   pegar en la terminal:  cd mi_proyecto
+   pegar en la terminal:  flutter create
+
+2. **Instala las dependencias** 
+    pegar en la terminal: flutter pub get
+    
+3. **Ejecuta el proyecto**
+    pegar en la terminal: flutter run
+
 ## 🌟 Estructura MVVM en EcoNomiza
 Para mantener un código limpio y escalable, EcoNomiza sigue la arquitectura **MVVM** (Modelo-Vista-ViewModel).
 
@@ -12,7 +25,7 @@ Para mantener un código limpio y escalable, EcoNomiza sigue la arquitectura **M
 - **Services:** Conectan con APIs externas o bases de datos.
 
 ### 📂 Estructura de Carpetas
-/lib 
+/lib # Código fuente en Dart
     ├── models/ # Modelos de datos 
     ├── views/ # Pantallas y widgets 
     ├── viewmodels/ # Lógica de presentación 
