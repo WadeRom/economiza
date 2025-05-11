@@ -5,41 +5,42 @@ App de registro de gastos para Android
 
 1. **Clona el repositorio, abre una terminal**
    ```sh
-    C:\Users\tuUsuario\Escritorio> git clone git@github.com:WadeRom/economiza.git
-    C:\Users\tuUsuario\Escritorio> cd economiza
+    C:\Users\tuUsuario\Escritorio> git clone git@github.com:WadeRom/economiza.git # Clonando repositorio remoto
+    C:\Users\tuUsuario\Escritorio> cd economiza # Moviendose al repositorio
 
 2. **Cambia a la rama develop con Git**
    ```sh
-    C:\Users\tuUsuario\Escritorio\economiza> git checkout develop
+    C:\Users\tuUsuario\Escritorio\economiza> git checkout develop # Cambiar a la rama destino
 
 3. **Instala las dependencias**
     ```sh 
-    C:\Users\tuUsuario\Escritorio\economiza> flutter create .
-    C:\Users\tuUsuario\Escritorio\economiza> flutter pub get
+    C:\Users\tuUsuario\Escritorio\economiza> flutter create . # Generando carpetas del proyecto
+    C:\Users\tuUsuario\Escritorio\economiza> flutter pub get # Instalando dependencias
 
 4. **Ejecuta el proyecto**
     ```sh
-    C:\Users\tuUsuario\Escritorio\economiza> flutter run
+    C:\Users\tuUsuario\Escritorio\economiza> flutter run # Ejecutando la app
 
 ## 🛠️ Proceso correcto para aportar al repositorio
 
 1. Actualizar tu repositorio antes de trabajar Antes de empezar cualquier desarrollo, asegúrate de tener la última versión de   develop:
     ```sh
-    C:\Users\tuUsuario\Escritorio\economiza> git checkout develop
-    C:\Users\tuUsuario\Escritorio\economiza> git pull origin develop
+    C:\Users\tuUsuario\Escritorio\economiza> git checkout develop # Cambiar a la rama destino
+    C:\Users\tuUsuario\Escritorio\economiza> git pull origin develop # Asegurar que el repositorio local está actualizado
 
 2. Crear una nueva rama para tu desarrollo Nunca trabajes directamente en develop. Crea una rama separada para tu feature o corrección:
     ```sh
-    C:\Users\tuUsuario\Escritorio\economiza> git checkout -b nombre-de-tu-rama
+    C:\Users\tuUsuario\Escritorio\economiza> git checkout -b nombre-de-tu-rama # Creando nueva rama local
 
 3. Desarrollar y realizar commits A medida que avances, guarda tus cambios con commits organizados:
     ```sh
-    C:\Users\tuUsuario\Escritorio\economiza> git add .
-    C:\Users\tuUsuario\Escritorio\economiza> git commit -m "feat: agregar reporte de gastos en pantalla"
+    C:\Users\tuUsuario\Escritorio\economiza> git add . # Preparando los cambios para el commit
+    C:\Users\tuUsuario\Escritorio\economiza> git commit -m "feat: agregar reporte de gastos en pantalla" # Comentando los cambios realizados antes de subirlos al repositorio
+
 
 4. Subir la rama al remoto Cuando termines los cambios, súbelos a GitHub:
     ```sh
-    C:\Users\tuUsuario\Escritorio\economiza> git push origin nombre-de-tu-rama
+    C:\Users\tuUsuario\Escritorio\economiza> git push origin nombre-de-tu-rama # Subir los cambios al remoto
 
 5. Crear un Pull Request (PR) Desde GitHub, crea un Pull Request para fusionar tu rama en develop. Un revisor del equipo verificará los cambios antes de integrarlos.
     - Ve al repositorio en GitHub.
@@ -49,15 +50,15 @@ App de registro de gastos para Android
 
 6. Fusionar los cambios en develop (cuando el PR sea aprobado) Después de que alguien del equipo apruebe tu PR, puedes fusionarlo en develop con:
     ```sh
-    C:\Users\tuUsuario\Escritorio\economiza> git checkout develop
-    C:\Users\tuUsuario\Escritorio\economiza> git pull origin develop
-    C:\Users\tuUsuario\Escritorio\economiza> git merge nombre-de-tu-rama
-    C:\Users\tuUsuario\Escritorio\economiza> git push origin develop
+    C:\Users\tuUsuario\Escritorio\economiza> git checkout develop # Cambiar a la rama destino
+    C:\Users\tuUsuario\Escritorio\economiza> git pull origin develop # Asegurar que el repositorio local está actualizado
+    C:\Users\tuUsuario\Escritorio\economiza> git merge nombre-de-tu-rama # Fusionar los cambios
+    C:\Users\tuUsuario\Escritorio\economiza> git push origin develop # Subir los cambios al remoto
 
 7. Actualizar develop y eliminar la rama si ya no es necesaria
     ```sh
-    C:\Users\tuUsuario\Escritorio\economiza> git checkout develop
-    C:\Users\tuUsuario\Escritorio\economiza> git pull origin develop
+    C:\Users\tuUsuario\Escritorio\economiza> git checkout develop # Cambiar a la rama destino
+    C:\Users\tuUsuario\Escritorio\economiza> git pull origin develop # Asegurar que el repositorio local está actualizado
     C:\Users\tuUsuario\Escritorio\economiza> git branch -d feature-nueva-funcionalidad  # Eliminación local
     C:\Users\tuUsuario\Escritorio\economiza> git push origin --delete feature-nueva-funcionalidad  # Eliminación en remoto
 
