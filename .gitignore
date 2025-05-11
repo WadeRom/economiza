@@ -4,6 +4,7 @@
 *.pyc
 *.swp
 *.lock
+.metadata
 .DS_Store
 .atom/
 .build/
