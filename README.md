@@ -2,17 +2,24 @@
 App de registro de gastos para Android
 
 ## 📦 Instalación
-1. **Clona el repositorio**
-   ```sh
-   pegar en la terminal:  git clone git@github.com:WadeRom/economiza.git
-   pegar en la terminal:  cd mi_proyecto
-   pegar en la terminal:  flutter create
 
-2. **Instala las dependencias** 
-    pegar en la terminal: flutter pub get
-    
+1. **Clona el repositorio, abre una terminal**
+   ```sh
+    C:\Users\tuUsuario\Escritorio> git clone git@github.com:WadeRom/economiza.git
+    C:\Users\tuUsuario\Escritorio> cd economiza
+
+1. **Cambia a la rama develop con Git**
+   ```sh
+    C:\Users\tuUsuario\Escritorio\economiza>  git checkout develop
+
+2. **Instala las dependencias**
+    ```sh 
+    C:\Users\tuUsuario\Escritorio\economiza> flutter create .
+    C:\Users\tuUsuario\Escritorio\economiza> flutter pub get
+
 3. **Ejecuta el proyecto**
-    pegar en la terminal: flutter run
+    ```sh
+    C:\Users\tuUsuario\Escritorio\economiza> flutter run
 
 ## 🌟 Estructura MVVM en EcoNomiza
 Para mantener un código limpio y escalable, EcoNomiza sigue la arquitectura **MVVM** (Modelo-Vista-ViewModel).
