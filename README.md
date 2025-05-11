@@ -12,14 +12,15 @@ Para mantener un código limpio y escalable, EcoNomiza sigue la arquitectura **M
 - **Services:** Conectan con APIs externas o bases de datos.
 
 ### 📂 Estructura de Carpetas
-/lib # Código fuente en Dart
-    ├── models/ # Modelos de datos 
-    ├── views/ # Pantallas y widgets 
-    ├── viewmodels/ # Lógica de presentación 
-    ├── services/ # Servicios externos (API, BD) 
-    ├── repositories/ # Manejo de datos 
-    ├── utils/ # Funciones auxiliares 
-    ├── main.dart # Punto de entrada
+
+    /lib # Código fuente en Dart
+        ├── models/ # Modelos de datos 
+        ├── views/ # Pantallas y widgets 
+        ├── viewmodels/ # Lógica de presentación 
+        ├── services/ # Servicios externos (API, BD)
+        ├── repositories/ # Manejo de datos
+        ├── utils/ # Funciones auxiliares 
+        ├── main.dart # Punto de entrada
 
 ## 📦 Instalación
 
