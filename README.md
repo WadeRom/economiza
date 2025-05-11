@@ -37,7 +37,6 @@ App de registro de gastos para Android
     C:\Users\tuUsuario\Escritorio\economiza> git add . # Preparando los cambios para el commit
     C:\Users\tuUsuario\Escritorio\economiza> git commit -m "feat: agregar reporte de gastos en pantalla" # Comentando los cambios realizados antes de subirlos al repositorio
 
-
 4. Subir la rama al remoto Cuando termines los cambios, súbelos a GitHub:
     ```sh
     C:\Users\tuUsuario\Escritorio\economiza> git push origin nombre-de-tu-rama # Subir los cambios al remoto
@@ -62,6 +61,47 @@ App de registro de gastos para Android
     C:\Users\tuUsuario\Escritorio\economiza> git branch -d feature-nueva-funcionalidad  # Eliminación local
     C:\Users\tuUsuario\Escritorio\economiza> git push origin --delete feature-nueva-funcionalidad  # Eliminación en remoto
 
+# 📝 Buenas Prácticas para Commits en Git
+
+Para asegurar un historial de cambios comprensible y estructurado, sigue estas recomendaciones al hacer commits en el proyecto.
+
+## 🔹 1️⃣ Mantén mensajes claros y concisos  
+
+1. **Evita mensajes genéricos como `"Cambios realizados"`. En su lugar, describe **qué** hiciste y **por qué**:**      
+    ```sh 
+    git commit -m "fix: corregir error en cálculo de impuestos"
+
+2. **📌 Formato recomendado: ✅ Usa un prefijo indicando el tipo de cambio:**
+    - feat: → Nueva funcionalidad
+    - fix: → Corrección de errores
+    - chore: → Mantenimiento o ajustes menores
+    - docs: → Actualización en documentación
+    - style: → Cambios de formato o estilo
+    - refactor: → Reestructuración de código
+    - test: → Agregar o modificar pruebas
+
+## 🔹 2️⃣ Usa mensajes detallados cuando sea necesario
+- Si el cambio es complejo, agrega una descripción más completa con -m o una segunda línea:
+
+    ```sh 
+    git commit -m "feat: implementar reporte mensual de gastos" -m "Se añadieron gráficos y filtros avanzados para visualizar mejor los datos."
+
+## 🔹 3️⃣ Evita commits acumulativos o gigantes
+- Es mejor hacer commits pequeños y específicos en lugar de uno solo con todos los cambios. ✅ Mal:
+
+    ```sh 
+    git commit -m "feat: cambios generales en el sistema"
+
+- ✅ Bien:
+    ```sh 
+    git commit -m "feat: agregar validación en formulario de usuarios"
+    git commit -m "fix: corregir error en reporte mensual"
+
+## 🔹 4️⃣ Siempre verifica los archivos antes de hacer commit
+- Antes de confirmar los cambios, revisa qué se está agregando o modificando:
+    ```sh 
+    git status
+    git diff
 
 ## 🌟 Estructura MVVM en EcoNomiza
 Para mantener un código limpio y escalable, EcoNomiza sigue la arquitectura **MVVM** (Modelo-Vista-ViewModel).
