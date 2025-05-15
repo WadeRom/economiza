@@ -13,14 +13,28 @@ Para mantener un código limpio y escalable, EcoNomiza sigue la arquitectura **M
 
 ### 📂 Estructura de Carpetas
 
-    /lib # Código fuente en Dart
-        ├── models/ # Modelos de datos 
-        ├── views/ # Pantallas y widgets 
-        ├── viewmodels/ # Lógica de presentación 
-        ├── services/ # Servicios externos (API, BD)
-        ├── repositories/ # Manejo de datos
-        ├── utils/ # Funciones auxiliares 
-        ├── main.dart # Punto de entrada
+📂 lib/
+ ├── 📂 data/                 # Capa de datos (acceso a la BD)
+ │    ├── 📂 database/       # Manejo y conexión de la BD
+ │    │    ├── sqlite_database_manager_service.dart
+ │    │    ├── sqlite_schema_manager.dart
+ │    ├── 📂 repositories/   # Interacción con la BD
+ │    │    ├── sqlite_database_repository.dart
+ │    ├── 📂 models/        # Definición de modelos de datos
+ │    │    ├── gasto_model.dart
+ │    │    ├── usuario_model.dart
+ │
+ ├── 📂 domain/              # Lógica de negocio
+ │    ├── 📂 use_cases/     # Casos de uso que aplican reglas de negocio
+ │
+ ├── 📂 presentation/        # Capa de presentación (UI y ViewModels)
+ │    ├── 📂 viewmodels/   # Manejo de estado y comunicación con repositorios
+ │    ├── 📂 views/        # Widgets y pantallas de la app
+ │
+ ├── 📂 utils/               # Funciones auxiliares y constantes
+ │
+ ├── main.dart               # Punto de entrada de la app
+
 
 ## 📦 Instalación
 
