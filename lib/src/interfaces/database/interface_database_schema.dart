@@ -1,11 +1,31 @@
-abstract class IDatabaseTableManager {
-  Future<void> createTable(String tableName, List<String> columns);
-  Future<void> alterTable(String tableName, String operation, String columnDefinition);
+enum TableOperation { add, drop, modify }
+/// Ejemplo de definición para columnas, lo cual ayuda a estructurar la creación o alteración de tablas.
+class ColumnDefinition {
+  final String name;
+  final String type;
+  final bool isPrimaryKey;
+  final bool isNullable;
+  final bool isAutoIncrement;
+  final String? foreignKey; // <-- NUEVO
+
+  ColumnDefinition({
+    required this.name,
+    required this.type,
+    this.isPrimaryKey = false,
+    this.isNullable = true,
+    this.isAutoIncrement = false,
+    this.foreignKey, // <-- NUEVO
+  });
 }
 
 abstract class IDatabaseSchemaManager {
-  Future<void> createSchema(String schemaName);
-  Future<void> dropSchema(String schemaName);
-  Future<void> renameSchema(String oldName, String newName);
-  Future<void> listSchemas();
+  /// Inicializa la conexión o configura la base de datos.
+  Future<void> setupConnectionDB();
+  
+  /// Cierra la conexión a la base de datos.
+  Future<void> closeConnectionDB();
+
+  /// Crea un "almacenamiento" (tabla, colección, etc.) con la definición dada.
+  Future<void> createSchemaDB(String storageName, List<ColumnDefinition> columns);
+
 }
