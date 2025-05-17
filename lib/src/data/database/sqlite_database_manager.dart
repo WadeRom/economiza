@@ -53,21 +53,22 @@ class SQLiteDatabaseManager implements IDatabaseSchemaManager {
     return _instance;
   }
   
+  @override
   Future<Database> getDatabase() async {
     if (_database == null) {
       print('Database is null, initializing...');
       // If the database is not initialized, set it up
       // and create the tables
-      await setupConnectionDB();
+      await _setupConnectionDB();
     }
     print('Database is initialized');
     // If the database is already initialized, return it
     return _database!;
   }
 
-  @override
+
   // Method to initialize the database
-  Future<void> setupConnectionDB() async {
+  Future<void> _setupConnectionDB() async {
     final String path = await getDatabasesPath();
     _database = await openDatabase(
       join(path, 'economiza.db'),
@@ -180,12 +181,12 @@ class SQLiteDatabaseManager implements IDatabaseSchemaManager {
           ),
         ], db: db);
 
-        await seedDatabase(db);
+        await _seedDatabase(db);
       }
     );
   }
 
-  Future<void> seedDatabase(Database db) async {
+  Future<void> _seedDatabase(Database db) async {
     final batch = db.batch();
     seedData.forEach((tableName, data) {
       final mapData = data as Map<String, dynamic>;
