@@ -141,7 +141,7 @@ class SQLiteDatabaseManager implements IDatabaseSchemaManager {
         await createSchemaDB('transaction', [
           ColumnDefinition(
             name: 'id',
-            type: 'INTEGER',
+            type: 'TEXT',
             isPrimaryKey: true,
             isAutoIncrement: true,
             isNullable: false,
