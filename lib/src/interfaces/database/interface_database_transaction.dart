@@ -1,3 +1,5 @@
+import 'package:economiza/src/interfaces/interface_uses_cases.dart';
+
 enum DatabaseOperationType { insert, update, query, rawInsert, rawUpdate, rawQuery }
 
 class DatabaseOperation {
@@ -63,7 +65,7 @@ class SimpleUpdateTransactionModel {
 }
 
 abstract class IDatabaseSimpleTransactionManager {
-  Future<int> insert(SimpleInsertTransactionModel transaction);
-  Future<int> update(SimpleUpdateTransactionModel transaction);
-  Future<List<Map<String, dynamic>>> query(SimpleQueryTransactionModel transaction);
+  Future<UseCaseResult<int>> insert(SimpleInsertTransactionModel transaction);
+  Future<UseCaseResult<int>> update(SimpleUpdateTransactionModel transaction);
+  Future<UseCaseResult<List<Map<String, dynamic>>>> query(SimpleQueryTransactionModel transaction);
 }
