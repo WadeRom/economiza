@@ -20,7 +20,7 @@ class ColumnDefinition {
 
 abstract class IDatabaseSchemaManager {
   /// Inicializa la conexión o configura la base de datos.
-  Future<void> setupConnectionDB();
+  Future<void> getDatabase();
   
   /// Cierra la conexión a la base de datos.
   Future<void> closeConnectionDB();
