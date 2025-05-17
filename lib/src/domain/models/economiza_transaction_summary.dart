@@ -1,5 +1,5 @@
 import 'package:economiza/src/domain/models/economiza_category_summary.dart';
-import 'package:economiza/src/interfaces/database/interface_database_serializable.dart';
+import 'package:economiza/src/interfaces/interface_serializable.dart';
 
 class EconomizaTransactionSummary implements Serializable {
   final double totalExpenses;
