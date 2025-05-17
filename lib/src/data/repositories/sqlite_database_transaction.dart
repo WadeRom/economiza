@@ -1,11 +1,11 @@
 import 'package:economiza/src/interfaces/database/interface_database_transaction.dart';
+import 'package:economiza/src/interfaces/interface_uses_cases.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqliteDatabaseTransaction implements IDatabaseSimpleTransactionManager {
   final Database _database;
   SqliteDatabaseTransaction(this._database);
 
-  // Método privado para validar la cantidad de placeholders en la consulta SQL
   void _validatePlaceholders(String sql, List<Object?> arguments) {
     final placeholderCount = RegExp(r'\?').allMatches(sql).length;
     
@@ -15,10 +15,8 @@ class SqliteDatabaseTransaction implements IDatabaseSimpleTransactionManager {
         'no coincide con la cantidad de argumentos (${arguments.length}).'
       );
     }
-
   }
 
-  // Método privado para validar sentencias SQL y tablas permitidas
   void _validateRawSql({
     required String sql,
     required String operation,
@@ -35,111 +33,117 @@ class SqliteDatabaseTransaction implements IDatabaseSimpleTransactionManager {
     if (tableMatch == null || !allowedTables.contains(tableMatch.group(1)?.toLowerCase())) {
       throw Exception('$errorMsgTable: ${tableMatch?.group(1)}');
     }
-    
   }
 
-  Future<int> rawInsert(String sql, List<Object?> arguments) async {
-    const allowedTables = ['transaction_category', 'transaction_state', 'transaction_type', 'transaction'];
-    
-    _validatePlaceholders(sql, arguments);
-    _validateRawSql(
-      sql: sql,
-      operation: 'INSERT',
-      tableRegExp: RegExp(r'INSERT\s+INTO\s+(\w+)', caseSensitive: false),
-      allowedTables: allowedTables,
-      errorMsgOperation: 'Entrada no válida, configuración no válida',
-      errorMsgTable: 'Tabla no disponible',
-    );
+  Future<UseCaseResult<int>> rawInsert(String sql, List<Object?> arguments) async {
+    try {
+      _validatePlaceholders(sql, arguments);
+      _validateRawSql(
+        sql: sql,
+        operation: 'INSERT',
+        tableRegExp: RegExp(r'INSERT\s+INTO\s+(\w+)', caseSensitive: false),
+        allowedTables: ['transaction_category', 'transaction_state', 'transaction_type', 'transaction'],
+        errorMsgOperation: 'Entrada no válida, configuración no válida',
+        errorMsgTable: 'Tabla no disponible',
+      );
 
-    return await _database.rawInsert(sql, arguments);
+      int result = await _database.rawInsert(sql, arguments);
+      return SuccessUseCaseResult(message: "Inserción exitosa", data: result);
+    } catch (e) {
+      throw FailureUseCaseResult(message: "Error al insertar: ${e.toString()}");
+    }
   }
 
-  Future<int> rawUpdate(String sql, List<Object?> arguments) async {
-    const allowedTables = ['transaction_category', 'transaction_state', 'transaction_type', 'transaction'];
-    
-    _validatePlaceholders(sql, arguments);
-    _validateRawSql(
-      sql: sql,
-      operation: 'UPDATE',
-      tableRegExp: RegExp(r'UPDATE\s+(\w+)', caseSensitive: false),
-      allowedTables: allowedTables,
-      errorMsgOperation: 'Entrada no válida, configuración no válida',
-      errorMsgTable: 'Tabla no disponible',
-    );
-    
+  Future<UseCaseResult<int>> rawUpdate(String sql, List<Object?> arguments) async {
+    try {
+      _validatePlaceholders(sql, arguments);
+      _validateRawSql(
+        sql: sql,
+        operation: 'UPDATE',
+        tableRegExp: RegExp(r'UPDATE\s+(\w+)', caseSensitive: false),
+        allowedTables: ['transaction_category', 'transaction_state', 'transaction_type', 'transaction'],
+        errorMsgOperation: 'Entrada no válida, configuración no válida',
+        errorMsgTable: 'Tabla no disponible',
+      );
 
-    return await _database.rawUpdate(sql, arguments);
+      int result = await _database.rawUpdate(sql, arguments);
+      return SuccessUseCaseResult(message: "Actualización exitosa", data: result);
+    } catch (e) {
+      throw FailureUseCaseResult(message: "Error al actualizar: ${e.toString()}");
+    }
   }
 
-  Future<List<Map<String, dynamic>>> rawQuery(String sql, List<Object?> arguments) async {
-    const allowedTables = ['transaction_category', 'transaction_state', 'transaction_type', 'transaction'];
-    
-    _validatePlaceholders(sql, arguments);
-    _validateRawSql(
-      sql: sql,
-      operation: 'SELECT',
-      tableRegExp: RegExp(r'FROM\s+(\w+)', caseSensitive: false),
-      allowedTables: allowedTables,
-      errorMsgOperation: 'Entrada no válida, configuración no válida',
-      errorMsgTable: 'Tabla no disponible',
-    );
+  Future<UseCaseResult<List<Map<String, dynamic>>>> rawQuery(String sql, List<Object?> arguments) async {
+    try {
+      _validatePlaceholders(sql, arguments);
+      _validateRawSql(
+        sql: sql,
+        operation: 'SELECT',
+        tableRegExp: RegExp(r'FROM\s+(\w+)', caseSensitive: false),
+        allowedTables: ['transaction_category', 'transaction_state', 'transaction_type', 'transaction'],
+        errorMsgOperation: 'Entrada no válida, configuración no válida',
+        errorMsgTable: 'Tabla no disponible',
+      );
 
-    return await _database.rawQuery(sql, arguments);
-  }
-
-  @override
-  Future<int> insert(SimpleInsertTransactionModel transaction, {String nullColumnHack = ""}) async {
-    return await _database.insert(
-      transaction.storage,
-      transaction.record,
-      nullColumnHack: nullColumnHack,
-      conflictAlgorithm: ConflictAlgorithm.ignore,
-    );
+      List<Map<String, dynamic>> result = await _database.rawQuery(sql, arguments);
+      return SuccessUseCaseResult(message: "Consulta exitosa", data: result);
+    } catch (e) {
+      throw FailureUseCaseResult(message: "Error en la consulta: ${e.toString()}");
+    }
   }
 
   @override
-  Future<int> update(SimpleUpdateTransactionModel transaction) async {
-    return await _database.update(
-      transaction.storage,
-      transaction.record,
-      where: transaction.where,
-      whereArgs: transaction.whereArgs,
-      conflictAlgorithm: ConflictAlgorithm.ignore,
-    );
+  Future<UseCaseResult<int>> insert(SimpleInsertTransactionModel transaction, {String nullColumnHack = ""}) async {
+    
+    try {
+
+      int result = await _database.insert(
+        transaction.storage,
+        transaction.record,
+        nullColumnHack: nullColumnHack,
+        conflictAlgorithm: ConflictAlgorithm.ignore,
+      );
+
+      return SuccessUseCaseResult(message: "Inserción exitosa", data: result);
+    } catch (e) {
+      throw FailureUseCaseResult(message: "Error al insertar: ${e.toString()}");
+    }
   }
 
   @override
-  Future<List<Map<String, dynamic>>> query(SimpleQueryTransactionModel transaction) async {
-    return await _database.query(
-      transaction.storage,
-      distinct: transaction.distinct,
-      columns: transaction.columns,
-      where: transaction.where,
-      whereArgs: transaction.whereArgs,
-      groupBy: transaction.groupBy,
-      having: transaction.having,
-      orderBy: transaction.orderBy,
-      limit: transaction.limit,
-      offset: transaction.offset,
-    );
+  Future<UseCaseResult<int>> update(SimpleUpdateTransactionModel transaction) async {
+    try {
+      int result = await _database.update(
+        transaction.storage,
+        transaction.record,
+        where: transaction.where,
+        whereArgs: transaction.whereArgs,
+        conflictAlgorithm: ConflictAlgorithm.ignore,
+      );
+      return SuccessUseCaseResult(message: "Actualización exitosa", data: result);
+    } catch (e) {
+      throw FailureUseCaseResult(message: "Error al actualizar: ${e.toString()}");
+    }
   }
 
-  //Metodo para ejecutar transacciones atomicas
-  //Si una de las operaciones falla, se revertiran todas las operaciones
-  //Esto es util para mantener la integridad de los datos
-  Future<T> runTransaction<T>(Future<T> Function(Transaction txn) operations) async {
-    return await _database.transaction((txn) async {
-      return await operations(txn);
-    });
+  @override
+  Future<UseCaseResult<List<Map<String, dynamic>>>> query(SimpleQueryTransactionModel transaction) async {
+    try {
+      List<Map<String, dynamic>> result = await _database.query(
+        transaction.storage,
+        distinct: transaction.distinct,
+        columns: transaction.columns,
+        where: transaction.where,
+        whereArgs: transaction.whereArgs,
+        groupBy: transaction.groupBy,
+        having: transaction.having,
+        orderBy: transaction.orderBy,
+        limit: transaction.limit,
+        offset: transaction.offset,
+      );
+      return SuccessUseCaseResult(message: "Consulta exitosa", data: result);
+    } catch (e) {
+      throw FailureUseCaseResult(message: "Error en la consulta: ${e.toString()}");
+    }
   }
-
-  //Metodo para ejecutar operaciones en una transaccion
-  //Esto es util para mantener la integridad de los datos
-  Future<List<dynamic>> batchTransaction(Future<void> Function(Batch batch) operations) async {
-    final Batch batch = _database.batch();
-    await operations(batch); // El callback recibe el batch para agregar operaciones
-    return await batch.commit(noResult: false); // Devuelve los resultados del batch
-  }
-
-  
 }
