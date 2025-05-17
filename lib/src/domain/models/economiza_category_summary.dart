@@ -1,4 +1,4 @@
-import 'package:economiza/src/interfaces/database/interface_database_serializable.dart';
+import 'package:economiza/src/interfaces/interface_serializable.dart';
 
 class EconomizaCategorySummary implements Serializable{
   final int id;
